@@ -31,6 +31,14 @@ class SplashBackground extends StatelessWidget {
               width: size.width * 0.3,
             ),
           ),
+          Positioned(
+            bottom: 10,
+            right: 0,
+            child: Image.asset(
+              "assets/images/flamenco-dancer.png",
+              width: size.width * 0.2,
+            ),
+          ),
           child
         ],
       ),

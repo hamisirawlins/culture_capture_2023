@@ -4,7 +4,9 @@ import 'package:culture_capture/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../widgets/apps_divider.dart';
 import '../../widgets/rounded_button.dart';
+import '../../widgets/social_icon.dart';
 import 'background.dart';
 
 class SplashBody extends StatelessWidget {
@@ -55,6 +57,30 @@ class SplashBody extends StatelessWidget {
                   ),
                 );
               },
+            ),
+            const AppsDivider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SocialIcon(
+                  press: () {
+                    print("Apple");
+                  },
+                  icon: "assets/icons/apple.png",
+                ),
+                SocialIcon(
+                  press: () {
+                    print("Google");
+                  },
+                  icon: "assets/icons/search.png",
+                ),
+                SocialIcon(
+                  press: () {
+                    print("Facebook");
+                  },
+                  icon: "assets/icons/facebook.png",
+                )
+              ],
             )
           ],
         ),
