@@ -1,5 +1,10 @@
+import 'package:culture_capture/components/login_screen/body.dart';
+import 'package:culture_capture/components/signup_screen/body.dart';
+import 'package:culture_capture/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../widgets/rounded_button.dart';
 import 'background.dart';
 
 class SplashBody extends StatelessWidget {
@@ -7,19 +12,52 @@ class SplashBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SplashBackground(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Culture Capture",
-            style: GoogleFonts.cormorant(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Culture Capture",
+              style: GoogleFonts.cormorant(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+              ),
             ),
-          )
-        ],
+            SvgPicture.asset(
+              "assets/logos/M-Standard.svg",
+              height: size.height * 0.2,
+            ),
+            RoundedButton(
+              text: "Log In",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) {
+                      return LoginScreen();
+                    }),
+                  ),
+                );
+              },
+            ),
+            RoundedButton(
+              text: "Sign Up",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) {
+                      return SignUpScreen();
+                    }),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }
