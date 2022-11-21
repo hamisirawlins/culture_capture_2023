@@ -9,10 +9,16 @@ import '../../widgets/already_have_account_check.dart';
 import '../../widgets/text_input.dart';
 import 'background.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   @override
@@ -72,6 +78,23 @@ class SignUpScreen extends StatelessWidget {
                           color: kSecondaryColor,
                         ),
                         hintText: "Password",
+                        border: InputBorder.none),
+                  ),
+                ),
+                TextInputContainer(
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                        icon: Icon(
+                          Icons.lock,
+                          color: kSecondaryColor,
+                        ),
+                        suffixIcon: Icon(
+                          Icons.remove_red_eye,
+                          color: kSecondaryColor,
+                        ),
+                        hintText: "Confirm Password",
                         border: InputBorder.none),
                   ),
                 ),
