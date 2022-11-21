@@ -1,6 +1,5 @@
 import 'package:culture_capture/components/login_screen/body.dart';
 import 'package:culture_capture/components/signup_screen/body.dart';
-import 'package:culture_capture/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';

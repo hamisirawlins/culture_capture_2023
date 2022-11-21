@@ -1,3 +1,4 @@
+
 import 'package:culture_capture/components/signup_screen/body.dart';
 import 'package:culture_capture/constants.dart';
 import 'package:culture_capture/widgets/rounded_button.dart';
@@ -9,7 +10,10 @@ import '../../widgets/text_input.dart';
 import 'background.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +46,10 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.05,
                 ),
-                const TextInputContainer(
+                TextInputContainer(
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: emailController,
+                    decoration: const InputDecoration(
                         icon: Icon(
                           Icons.person,
                           color: kSecondaryColor,
@@ -53,10 +58,11 @@ class LoginScreen extends StatelessWidget {
                         border: InputBorder.none),
                   ),
                 ),
-                const TextInputContainer(
+                TextInputContainer(
                   child: TextField(
+                    controller: passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         icon: Icon(
                           Icons.lock,
                           color: kSecondaryColor,

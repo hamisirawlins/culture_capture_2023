@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:culture_capture/components/login_screen/body.dart';
 import 'package:culture_capture/constants.dart';
 import 'package:culture_capture/widgets/rounded_button.dart';
@@ -9,7 +10,10 @@ import '../../widgets/text_input.dart';
 import 'background.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  SignUpScreen({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +46,10 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.05,
                 ),
-                const TextInputContainer(
+                TextInputContainer(
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: emailController,
+                    decoration: const InputDecoration(
                         icon: Icon(
                           Icons.person,
                           color: kSecondaryColor,
@@ -53,10 +58,11 @@ class SignUpScreen extends StatelessWidget {
                         border: InputBorder.none),
                   ),
                 ),
-                const TextInputContainer(
+                TextInputContainer(
                   child: TextField(
+                    controller: passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         icon: Icon(
                           Icons.lock,
                           color: kSecondaryColor,
@@ -66,22 +72,6 @@ class SignUpScreen extends StatelessWidget {
                           color: kSecondaryColor,
                         ),
                         hintText: "Password",
-                        border: InputBorder.none),
-                  ),
-                ),
-                const TextInputContainer(
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.lock,
-                          color: kSecondaryColor,
-                        ),
-                        suffixIcon: Icon(
-                          Icons.remove_red_eye,
-                          color: kSecondaryColor,
-                        ),
-                        hintText: "Confirm Password",
                         border: InputBorder.none),
                   ),
                 ),
