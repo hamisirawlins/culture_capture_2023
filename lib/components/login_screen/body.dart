@@ -3,6 +3,7 @@ import 'package:culture_capture/constants.dart';
 import 'package:culture_capture/widgets/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/already_have_account_check.dart';
@@ -21,17 +22,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final passwordController = TextEditingController();
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-  }
-
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim());
+    Phoenix.rebirth(context);
   }
 
   @override

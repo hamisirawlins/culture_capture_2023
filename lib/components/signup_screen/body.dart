@@ -3,6 +3,7 @@ import 'package:culture_capture/components/login_screen/body.dart';
 import 'package:culture_capture/constants.dart';
 import 'package:culture_capture/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/already_have_account_check.dart';
@@ -18,8 +19,34 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+      Phoenix.rebirth(context);
+    }
+  }
+
+  bool passwordConfirmed() {
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 TextInputContainer(
                   child: TextField(
-                    controller: passwordController,
+                    controller: confirmPasswordController,
                     obscureText: true,
                     decoration: const InputDecoration(
                         icon: Icon(
@@ -98,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         border: InputBorder.none),
                   ),
                 ),
-                RoundedButton(text: "Sign Up", press: () {}),
+                RoundedButton(text: "Sign Up", press: signUp),
                 SizedBox(
                   height: size.height * 0.03,
                 ),
