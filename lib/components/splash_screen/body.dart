@@ -63,12 +63,6 @@ class SplashBody extends StatelessWidget {
               children: <Widget>[
                 SocialIcon(
                   press: () {
-                    print("Apple");
-                  },
-                  icon: "assets/icons/apple.png",
-                ),
-                SocialIcon(
-                  press: () {
                     print("Google");
                   },
                   icon: "assets/icons/search.png",
