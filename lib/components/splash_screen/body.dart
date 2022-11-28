@@ -1,15 +1,42 @@
 import 'package:culture_capture/components/login_screen/body.dart';
 import 'package:culture_capture/components/signup_screen/body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../widgets/apps_divider.dart';
 import '../../widgets/rounded_button.dart';
+import '../../widgets/show_snackbar.dart';
 import '../../widgets/social_icon.dart';
 import 'background.dart';
 
-class SplashBody extends StatelessWidget {
+class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
+
+  @override
+  State<SplashBody> createState() => _SplashBodyState();
+}
+
+class _SplashBodyState extends State<SplashBody> {
+  Future googleSignIn() async {
+    try {
+      final GoogleSignInAccount? google_user = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? google_auth =
+          await google_user?.authentication;
+      if (google_auth?.accessToken != null && google_auth?.idToken != null) {
+        final credential = GoogleAuthProvider.credential(
+            accessToken: google_auth?.accessToken,
+            idToken: google_auth?.idToken);
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+      }
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!);
+    }
+    Phoenix.rebirth(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +90,7 @@ class SplashBody extends StatelessWidget {
               children: <Widget>[
                 SocialIcon(
                   press: () {
-                    print("Google");
+                    googleSignIn();
                   },
                   icon: "assets/icons/search.png",
                 ),
